@@ -1,0 +1,151 @@
+estilo
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #8bdabf;
+  color: #333;
+  padding: 40px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+#login {
+  max-width: 400px;
+  margin: auto;
+  background: rgb(88, 163, 78);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+#login input, .formulario input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login button, .formulario button, .exportar, .eliminar {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+#login button {
+  background-color: #138664;
+  color: white;
+}
+
+#login button:hover {
+  background-color: #2471a3;
+}
+
+#contenido {
+  display: none;
+}
+
+#cargando {
+  display: none;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.spinner {
+  margin: 30px auto;
+  width: 60px;
+  height: 60px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #2980b9;
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+thead {
+  background-color: #2980b9;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.formulario {
+  margin-top: 40px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.formulario h2 {
+  margin-top: 0;
+  color: #2980b9;
+}
+
+.formulario input {
+  width: calc(25% - 12px);
+  box-sizing: border-box;
+}
+
+.formulario button {
+  background-color: #27ae60;
+  color: white;
+}
+
+.formulario button:hover {
+  background-color: #219150;
+}
+
+.exportar {
+  background-color: #b9d2e2;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.exportar:hover {
+  background-color: #2980b9;
+}
+
+.eliminar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.eliminar:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .formulario input {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
