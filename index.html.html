@@ -4,7 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Inventario</title>
-  <link rel="stylesheet" href="Styles css/estilo.css">
+  <link rel="stylesheet" href="estilo.css">
+  <style>
+    #cargando, #contenido {
+      display: none;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <div id="login">
@@ -21,7 +39,7 @@
   </div>
 
   <div id="contenido">
-    <h1>Garantia 1.1</h1>
+    <h1>Garantía 1.1</h1>
     <h1>Yo Smart</h1>
 
     <button class="exportar" onclick="exportTableToExcel('inventario', 'inventario_excel')">📅 Exportar a Excel</button>
@@ -50,8 +68,6 @@
           <td>R12132473</td>
           <td>Maicol</td>
           <td>23/04/2025</td>
-          <td><button class="eliminar"
-       
           <td><button class="eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
         </tr>
       </tbody>
@@ -73,6 +89,5 @@
   </div>
 
   <script src="Funcion java/funcion.js"></script>
-  
 </body>
 </html>
