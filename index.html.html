@@ -1,11 +1,13 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Inventario</title>
-  <link rel="stylesheet" href="estilo.css">
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
     #cargando, #contenido {
       display: none;
     }
@@ -22,9 +24,32 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: center;
+    }
+    .formulario input {
+      display: block;
+      margin: 8px 0;
+      padding: 6px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .exportar, .eliminar, .formulario button {
+      padding: 6px 12px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+
   <div id="login">
     <h2>BIENVENIDO</h2>
     <input type="text" id="usuario" placeholder="Usuario">
@@ -39,8 +64,7 @@
   </div>
 
   <div id="contenido">
-    <h1>Garantía 1.1</h1>
-    <h1>Yo Smart</h1>
+    <h1>Garantía 1.1 - Yo Smart</h1>
 
     <button class="exportar" onclick="exportTableToExcel('inventario', 'inventario_excel')">📅 Exportar a Excel</button>
 
@@ -59,17 +83,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>23/04/2025</td>
-          <td>IPHONE 11 64GB</td>
-          <td>352908118265790</td>
-          <td>BATERIA</td>
-          <td>TANIS ADENS</td>
-          <td>R12132473</td>
-          <td>Maicol</td>
-          <td>23/04/2025</td>
-          <td><button class="eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
-        </tr>
+        <!-- Registros dinámicos -->
       </tbody>
     </table>
 
@@ -83,11 +97,97 @@
       <input type="text" id="cedula" placeholder="Cédula">
       <input type="text" id="tecnico" placeholder="Técnico">
       <input type="text" id="fechaSalida" placeholder="Fecha de Salida">
-      <br>
       <button onclick="agregarRegistro()">➕ Agregar al Inventario</button>
     </div>
   </div>
 
-  <script src="Funcion java/funcion.js"></script>
+  <script>
+    function iniciarSesion() {
+      const usuario = document.getElementById("usuario").value;
+      const contrasena = document.getElementById("contrasena").value;
+
+      if (usuario === "felix" && contrasena === "1234") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("cargando").style.display = "block";
+
+        setTimeout(() => {
+          document.getElementById("cargando").style.display = "none";
+          document.getElementById("contenido").style.display = "block";
+        }, 2000);
+      } else {
+        document.getElementById("mensaje").textContent = "Usuario o contraseña incorrecta";
+      }
+    }
+
+    function agregarRegistro() {
+      const datos = {
+        fechaEntrada: document.getElementById("fechaEntrada").value,
+        equipo: document.getElementById("equipo").value,
+        imel: document.getElementById("imel").value,
+        problema: document.getElementById("problema").value,
+        cliente: document.getElementById("cliente").value,
+        cedula: document.getElementById("cedula").value,
+        tecnico: document.getElementById("tecnico").value,
+        fechaSalida: document.getElementById("fechaSalida").value
+      };
+
+      const tabla = document.getElementById("inventario").getElementsByTagName('tbody')[0];
+      const nuevaFila = tabla.insertRow();
+      Object.values(datos).forEach(valor => {
+        const celda = nuevaFila.insertCell();
+        celda.textContent = valor;
+      });
+
+      const celdaAccion = nuevaFila.insertCell();
+      const boton = document.createElement("button");
+      boton.textContent = "Eliminar";
+      boton.className = "eliminar";
+      boton.onclick = function () {
+        eliminarFila(this);
+      };
+      celdaAccion.appendChild(boton);
+
+      document.querySelectorAll(".formulario input").forEach(input => input.value = "");
+
+      fetch('guardar_registro.php', {
+        method: 'POST',
+        body: JSON.stringify(datos),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(resultado => {
+        if (resultado.status === 'ok') {
+          console.log('Registro guardado correctamente');
+        } else {
+          alert('Error al guardar: ' + resultado.mensaje);
+        }
+      })
+      .catch(error => {
+        alert('Error en la conexión con el servidor');
+        console.error(error);
+      });
+    }
+
+    function eliminarFila(boton) {
+      const fila = boton.closest("tr");
+      fila.remove();
+    }
+
+    function exportTableToExcel(tableID, filename = '') {
+      const downloadLink = document.createElement("a");
+      const dataType = 'application/vnd.ms-excel';
+      const tableSelect = document.getElementById(tableID);
+      const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      filename = filename ? filename + '.xls' : 'excel_data.xls';
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+      downloadLink.download = filename;
+      downloadLink.click();
+    }
+  </script>
+
 </body>
 </html>
+
