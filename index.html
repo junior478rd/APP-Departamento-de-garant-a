@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,7 +37,7 @@
   </div>
 
   <div id="contenido">
-    <h1>Garantia 1.1</h1>
+    <h1>Garantía 1.1</h1>
     <h1>Yo Smart</h1>
 
     <button class="exportar" onclick="exportTableToExcel('inventario', 'inventario_excel')">📅 Exportar a Excel</button>
@@ -92,7 +91,15 @@
       const user = document.getElementById('usuario').value;
       const pass = document.getElementById('contrasena').value;
       const mensaje = document.getElementById('mensaje');
-      if (user === "admin" && pass === "1234") {
+
+      const credencialesValidas = [
+        { usuario: "admin", contrasena: "1234" },
+        { usuario: "felix", contrasena: "1234" }
+      ];
+
+      const accesoPermitido = credencialesValidas.some(cred => cred.usuario === user && cred.contrasena === pass);
+
+      if (accesoPermitido) {
         document.getElementById('login').style.display = "none";
         document.getElementById('cargando').style.display = "block";
         setTimeout(() => {
@@ -113,18 +120,18 @@
       const tabla = document.getElementById('inventario').getElementsByTagName('tbody')[0];
       const fila = tabla.insertRow();
 
-      const datos = [
-        'fechaEntrada', 'equipo', 'imel', 'problema', 'cliente',
-        'cedula', 'tecnico', 'fechaSalida'
-      ];
+      const campos = ['fechaEntrada', 'equipo', 'imel', 'problema', 'cliente', 'cedula', 'tecnico', 'fechaSalida'];
 
-      for (const id of datos) {
+      campos.forEach(id => {
         const celda = fila.insertCell();
         celda.textContent = document.getElementById(id).value;
-      }
+      });
 
       const celdaAccion = fila.insertCell();
       celdaAccion.innerHTML = `<button class="eliminar" onclick="eliminarFila(this)">Eliminar</button>`;
+
+      // Limpia los campos
+      campos.forEach(id => document.getElementById(id).value = "");
     }
 
     function exportTableToExcel(tableID, filename = '') {
@@ -145,3 +152,4 @@
   </script>
 </body>
 </html>
+
