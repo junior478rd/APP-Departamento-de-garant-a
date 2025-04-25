@@ -4,7 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Inventario</title>
-  <link rel="stylesheet" href="Styles css/estilo.css">
+  <link rel="stylesheet" href="Styles%20css/estilo.css">
+  <style>
+    #cargando, #contenido {
+      display: none;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #555;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <div id="login">
@@ -50,8 +67,6 @@
           <td>R12132473</td>
           <td>Maicol</td>
           <td>23/04/2025</td>
-          <td><button class="eliminar"
-       
           <td><button class="eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
         </tr>
       </tbody>
@@ -72,7 +87,61 @@
     </div>
   </div>
 
-  <script src="Funcion java/funcion.js"></script>
-  
+  <script>
+    function iniciarSesion() {
+      const user = document.getElementById('usuario').value;
+      const pass = document.getElementById('contrasena').value;
+      const mensaje = document.getElementById('mensaje');
+      if (user === "admin" && pass === "1234") {
+        document.getElementById('login').style.display = "none";
+        document.getElementById('cargando').style.display = "block";
+        setTimeout(() => {
+          document.getElementById('cargando').style.display = "none";
+          document.getElementById('contenido').style.display = "block";
+        }, 1000);
+      } else {
+        mensaje.textContent = "Credenciales incorrectas.";
+      }
+    }
+
+    function eliminarFila(btn) {
+      const fila = btn.closest("tr");
+      fila.remove();
+    }
+
+    function agregarRegistro() {
+      const tabla = document.getElementById('inventario').getElementsByTagName('tbody')[0];
+      const fila = tabla.insertRow();
+
+      const datos = [
+        'fechaEntrada', 'equipo', 'imel', 'problema', 'cliente',
+        'cedula', 'tecnico', 'fechaSalida'
+      ];
+
+      for (const id of datos) {
+        const celda = fila.insertCell();
+        celda.textContent = document.getElementById(id).value;
+      }
+
+      const celdaAccion = fila.insertCell();
+      celdaAccion.innerHTML = `<button class="eliminar" onclick="eliminarFila(this)">Eliminar</button>`;
+    }
+
+    function exportTableToExcel(tableID, filename = '') {
+      const downloadLink = document.createElement('a');
+      const dataType = 'application/vnd.ms-excel';
+      const tableSelect = document.getElementById(tableID);
+      const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+      downloadLink.download = filename;
+
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  </script>
 </body>
 </html>
