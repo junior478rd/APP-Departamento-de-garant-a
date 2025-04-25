@@ -1,0 +1,78 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventario</title>
+  <link rel="stylesheet" href="Styles css/estilo.css">
+</head>
+<body>
+  <div id="login">
+    <h2>BIENVENIDO</h2>
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="password" id="contrasena" placeholder="Contraseña">
+    <button onclick="iniciarSesion()">Entrar</button>
+    <p id="mensaje" style="color: red;"></p>
+  </div>
+
+  <div id="cargando">
+    <h2>Iniciando sesión...</h2>
+    <div class="spinner"></div>
+  </div>
+
+  <div id="contenido">
+    <h1>Garantia 1.1</h1>
+    <h1>Yo Smart</h1>
+
+    <button class="exportar" onclick="exportTableToExcel('inventario', 'inventario_excel')">📅 Exportar a Excel</button>
+
+    <table id="inventario">
+      <thead>
+        <tr>
+          <th>FECHA DE ENTRADA</th>
+          <th>EQUIPO</th>
+          <th>IMEL</th>
+          <th>PROBLEMA</th>
+          <th>CLIENTE</th>
+          <th>CEDULA</th>
+          <th>TECNICO</th>
+          <th>FECHA DE SALIDA</th>
+          <th>ACCIÓN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>23/04/2025</td>
+          <td>IPHONE 11 64GB</td>
+          <td>352908118265790</td>
+          <td>BATERIA</td>
+          <td>TANIS ADENS</td>
+          <td>R12132473</td>
+          <td>Maicol</td>
+          <td>23/04/2025</td>
+          <td><button class="eliminar"
+       
+          <td><button class="eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="formulario">
+      <h2>Agregar nuevo registro</h2>
+      <input type="text" id="fechaEntrada" placeholder="Fecha de Entrada">
+      <input type="text" id="equipo" placeholder="Equipo">
+      <input type="text" id="imel" placeholder="IMEL">
+      <input type="text" id="problema" placeholder="Problema">
+      <input type="text" id="cliente" placeholder="Cliente">
+      <input type="text" id="cedula" placeholder="Cédula">
+      <input type="text" id="tecnico" placeholder="Técnico">
+      <input type="text" id="fechaSalida" placeholder="Fecha de Salida">
+      <br>
+      <button onclick="agregarRegistro()">➕ Agregar al Inventario</button>
+    </div>
+  </div>
+
+  <script src="Funcion java/funcion.js"></script>
+  <php src="php/Untitled-1.php"></php>
+</body>
+</html>
