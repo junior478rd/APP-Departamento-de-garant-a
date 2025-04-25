@@ -1,9 +1,9 @@
-estilo
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #8bdabf;
   color: #333;
   padding: 40px;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -18,20 +18,24 @@ h1 {
   background: rgb(88, 163, 78);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-#login input, .formulario input {
+#login input,
+.formulario input {
   width: 100%;
   margin: 10px 0;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
-#login button, .formulario button, .exportar, .eliminar {
+button,
+.exportar,
+.eliminar {
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
@@ -45,11 +49,7 @@ h1 {
 }
 
 #login button:hover {
-  background-color: #2471a3;
-}
-
-#contenido {
-  display: none;
+  background-color: #0e5f49;
 }
 
 #cargando {
@@ -69,21 +69,26 @@ h1 {
 }
 
 @keyframes girar {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: left;
 }
@@ -102,7 +107,7 @@ tr:nth-child(even) {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .formulario h2 {
@@ -112,12 +117,13 @@ tr:nth-child(even) {
 
 .formulario input {
   width: calc(25% - 12px);
-  box-sizing: border-box;
+  margin: 5px;
 }
 
 .formulario button {
   background-color: #27ae60;
   color: white;
+  margin-top: 15px;
 }
 
 .formulario button:hover {
@@ -125,13 +131,13 @@ tr:nth-child(even) {
 }
 
 .exportar {
-  background-color: #b9d2e2;
+  background-color: #3498db;
   color: white;
   margin-bottom: 20px;
 }
 
 .exportar:hover {
-  background-color: #2980b9;
+  background-color: #2471a3;
 }
 
 .eliminar {
