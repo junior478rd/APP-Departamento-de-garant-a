@@ -116,7 +116,7 @@
       });
 
       const celdaAccion = fila.insertCell();
-      celdaAccion.innerHTML = `<button class="eliminar" onclick="eliminarFila(this)">Eliminar</button>`;
+      celdaAccion.innerHTML = <button class="eliminar" onclick="eliminarFila(this)">Eliminar</button>;
 
       // Limpia los campos
       campos.forEach(id => document.getElementById(id).value = "");
